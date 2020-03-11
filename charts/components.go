@@ -40,6 +40,11 @@ func (TitleOpts) markGlobal() {}
 
 // LegendOpts is the option set for a legend component.
 type LegendOpts struct {
+	Type     string `json:"type,omitempty"`
+	Orient   string `json:"orient,omitempty"`
+	Width    string `json:"width,omitempty"`
+	Height   string `json:"height,omitempty"`
+	Selector bool   `json:"selector,omitempty"`
 	// 图例组件离容器左侧的距离。
 	// left 的值可以是像 20 这样的具体像素值，可以是像 '20%' 这样相对于容器高宽的百分比
 	// 也可以是 'left', 'center', 'right'。
@@ -276,6 +281,12 @@ type SplitLineOpts struct {
 type XAxisOpts struct {
 	// X 轴名称
 	Name string `json:"name,omitempty"`
+	// Location of axis name
+	NameLocation string `json:"nameLocation,omitempty"`
+	// Gap between axis name and axis line
+	NameGap int `json:"nameGap,omitempty"`
+	// Rotation of axis name
+	NameRotate int `json:"nameRotate,omitempty"`
 	// X 坐标轴类型，可选：
 	// "value"：数值轴，适用于连续数据。
 	// "category" 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。
@@ -285,6 +296,20 @@ type XAxisOpts struct {
 	Type string `json:"type,omitempty"`
 	// 是否显示 X 轴
 	Show bool `json:"show,omitempty"`
+	// 刻度标签的内容格式器，支持字符串模板和回调函数两种形式
+	// 1.使用字符串模板，模板变量为刻度默认标签 {value}
+	// formatter: '{value} kg'
+	// 2.使用函数模板，函数参数分别为刻度数值（类目），刻度的索引
+	// formatter: function (value, index) {
+	//    // 格式化成月/日，只在第一个刻度显示年份
+	//    var date = new Date(value);
+	//    var texts = [(date.getMonth() + 1), date.getDate()];
+	//    if (index === 0) {
+	//        texts.unshift(date.getYear());
+	//    }
+	//    return texts.join('/');
+	// }
+	AxisLabel LabelTextOpts `json:"axisLabel,omitempty"`
 	// X 轴数据项
 	Data interface{} `json:"data,omitempty"`
 	// X 坐标轴的分割段数，需要注意的是这个分割段数只是个预估值，
@@ -317,6 +342,12 @@ func (XAxisOpts) markGlobal() {}
 type YAxisOpts struct {
 	// Y 轴名称
 	Name string `json:"name,omitempty"`
+	// Location of axis name
+	NameLocation string `json:"nameLocation,omitempty"`
+	// Gap between axis name and axis line
+	NameGap int `json:"nameGap,omitempty"`
+	// Rotation of axis name
+	NameRotate int `json:"nameRotate,omitempty"`
 	// Y 坐标轴类型，可选：
 	// "value"：数值轴，适用于连续数据。
 	// "category" 类目轴，适用于离散的类目数据，为该类型时必须通过 data 设置类目数据。

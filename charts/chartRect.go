@@ -95,6 +95,9 @@ func (rc *RectChart) validateOpts() {
 	for i := 0; i < len(rc.YAxisOptsList); i++ {
 		rc.YAxisOptsList[i].AxisLabel.Show = true
 	}
+	for i := 0; i < len(rc.XAxisOptsList); i++ {
+		rc.XAxisOptsList[i].AxisLabel.Show = true
+	}
 	rc.validateAssets(rc.AssetsHost)
 }
 

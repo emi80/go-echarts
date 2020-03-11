@@ -42,6 +42,7 @@ type LabelTextOpts struct {
 	//    percent: number,		// 饼图的百分比
 	// }
 	Formatter string `json:"formatter,omitempty"`
+	Interval  int    `json:"interval,omitempty" default:"auto"`
 }
 
 func (LabelTextOpts) markSeries() {}
